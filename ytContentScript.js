@@ -9,3 +9,18 @@ s.onload = function() {
     this.remove();
 };
 (document.head || document.documentElement).appendChild(s);
+
+
+
+
+
+document.addEventListener('yourCustomEvent', function (e) {
+  var data = e.detail;
+  console.log('received', data);
+  
+  chrome.runtime.sendMessage(data, function(response) {
+	  console.log(response.farewell);
+	});
+});
+
+document.addEventListener('keypress', test1);

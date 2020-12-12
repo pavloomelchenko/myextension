@@ -10,33 +10,38 @@ $(function() {
   });
   
   $('#mybutton').click(function() {
-	  
-	 ytplayer = document.getElementById("movie_player");
-     ytplayer.getCurrentTime();
-
-     window.alert("sometext");
-	 
-	 
-	 
-	 //$('#bookmarks').empty();
-     //dumpBookmarks($('#search').val());
+     
+     chrome.storage.sync.set(   {"videolink":[]}, function(){
+		 reloadBookmarks();
+			});
+		
   });
   
   
 });
 
 
-function myFunction(){
-//console.log("myFunction");
-window.alert("sometext");
 
+
+function reloadBookmarks(query) {
+	var extitems;			
+	chrome.storage.sync.get(/* String or Array */["videolink"], function(items){
+			
+			extitems = items.videolink;
+			
+			
+			extitems.forEach(function(entry) {
+				console.log(entry);
+				
+				$('#bookmarks1').append('<div><a href="' + entry + '" target="_blank">Bookmark..</a></div>');
+			});
+			
+		});
+		
+		
+		
+		
 }
-
-
-
-
-
-
 
 
 
@@ -159,5 +164,6 @@ function dumpNode(bookmarkNode, query) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  dumpBookmarks();
+  // dumpBookmarks();
+  reloadBookmarks();
 });
