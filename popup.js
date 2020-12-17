@@ -13,7 +13,8 @@ $(function() {
      
      chrome.storage.sync.set(   {"videolink":[]}, function(){
 		 reloadBookmarks();
-			});
+
+	 });
 		
   });
   
@@ -24,16 +25,16 @@ $(function() {
 
 
 function reloadBookmarks(query) {
-	var extitems;			
+
 	chrome.storage.sync.get(/* String or Array */["videolink"], function(items){
 			
-			extitems = items.videolink;
+			var extitems = items.videolink;
 			
 			
 			extitems.forEach(function(entry) {
 				console.log(entry);
 				
-				$('#bookmarks1').append('<div><a href="' + entry + '" target="_blank">Bookmark..</a></div>');
+				$('#bookmarks1').append('<div><a href="' + entry.location + '" target="_blank">'+entry.tabName+'</a></div>');
 			});
 			
 		});
